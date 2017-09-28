@@ -1,0 +1,2 @@
+class TennisController < ApplicationController
+end

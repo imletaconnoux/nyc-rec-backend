@@ -1,0 +1,2 @@
+class Bbq < ApplicationRecord
+end
