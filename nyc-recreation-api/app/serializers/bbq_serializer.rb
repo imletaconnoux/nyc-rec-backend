@@ -1,3 +1,3 @@
 class BbqSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location
+  attributes *Bbq.column_names
 end

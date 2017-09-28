@@ -1,2 +1,0 @@
-class ZoosController < ApplicationController
-end

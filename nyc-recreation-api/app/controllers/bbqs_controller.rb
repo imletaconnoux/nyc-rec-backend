@@ -1,2 +1,0 @@
-class BbqsController < ApplicationController
-end

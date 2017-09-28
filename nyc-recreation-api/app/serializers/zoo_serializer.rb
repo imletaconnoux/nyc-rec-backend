@@ -1,3 +1,3 @@
 class ZooSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location
+  attributes *Zoo.column_names
 end

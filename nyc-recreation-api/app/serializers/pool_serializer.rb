@@ -1,3 +1,3 @@
 class PoolSerializer < ActiveModel::Serializer
-  attributes :id, :name, :location, :phone, :pools_outdoor_type, :setting, :size
+  attributes *Pool.column_names
 end
