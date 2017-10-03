@@ -30,12 +30,36 @@ class Api::V1::UsersController < ApplicationController
         UserPref.create(user_id: @user.id, zoo_id: params[:zoo_id])
       end
       if params[:pool_id]
+        byebug
         @pool = Pool.find(params[:pool_id])
         UserPref.create(user_id: @user.id, pool_id: params[:pool_id])
       end
       if params[:tenni_id]
         @tenni = Tenni.find(params[:tenni_id])
         UserPref.create(user_id: @user.id, tenni_id: params[:tenni_id])
+      end
+      render json: @user, status: 200
+    end
+  end
+
+  def destroy
+    if @user
+      if params[:bbq_id]
+        @bbq = Bbq.find(params[:bbq_id])
+        UserPref.delete(user_id: @user.id, bbq_id: params[:bbq_id])
+      end
+      if params[:zoo_id]
+        @zoo = Zoo.find(params[:zoo_id])
+        UserPref.delete(user_id: @user.id, zoo_id: params[:zoo_id])
+      end
+      if params[:pool_id]
+        byebug
+        @pool = Pool.find(params[:pool_id])
+        UserPref.delete(user_id: @user.id, pool_id: params[:pool_id])
+      end
+      if params[:tenni_id]
+        @tenni = Tenni.find(params[:tenni_id])
+        UserPref.delete(user_id: @user.id, tenni_id: params[:tenni_id])
       end
       render json: @user, status: 200
     end
@@ -63,7 +87,7 @@ class Api::V1::UsersController < ApplicationController
          zoo = Zoo.all.find(user_pref[:zoo_id])
          pref_objs[:zoos].push({zoo_info: zoo})
        elsif user_pref[:tenni_id]
-         tenni = Tennis.all.find(user_pref[:tenni_id])
+         tenni = Tenni.all.find(user_pref[:tenni_id])
          pref_objs[:tennis].push({tenni_info: tenni})
        elsif user_pref[:bbq_id]
          bbq = Bbq.all.find(user_pref[:bbq_id])
