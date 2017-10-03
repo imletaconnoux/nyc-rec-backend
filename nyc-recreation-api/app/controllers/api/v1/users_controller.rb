@@ -15,6 +15,32 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    if @user
+      if params[:bbq_id]
+        @bbq = Bbq.find(params[:bbq_id])
+        UserPref.create(user_id: @user.id, bbq_id: params[:bbq_id])
+      end
+      if params[:zoo_id]
+        @zoo = Zoo.find(params[:zoo_id])
+        UserPref.create(user_id: @user.id, zoo_id: params[:zoo_id])
+      end
+      if params[:pool_id]
+        @pool = Pool.find(params[:pool_id])
+        UserPref.create(user_id: @user.id, pool_id: params[:pool_id])
+      end
+      if params[:tenni_id]
+        @tenni = Tenni.find(params[:tenni_id])
+        UserPref.create(user_id: @user.id, tenni_id: params[:tenni_id])
+      end
+      render json: @user, status: 200
+    end
+  end
+
   def me
     #should be able to retrieve user and their prefs
     if @user

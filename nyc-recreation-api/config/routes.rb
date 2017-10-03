@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       get '/users', to: 'users#index'
       post '/users', to: 'users#create'
       get '/users/me', to: 'users#me'
+      get '/users/me/edit', to: 'users#edit'
+      patch '/users/me', to: 'users#update'
+      delete '/users/me', to: 'users#destroy'
     end
   end
   post '/login', to: 'auth#create'
