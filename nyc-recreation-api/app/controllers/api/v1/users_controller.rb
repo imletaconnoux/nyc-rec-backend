@@ -30,7 +30,6 @@ class Api::V1::UsersController < ApplicationController
         UserPref.create(user_id: @user.id, zoo_id: params[:zoo_id])
       end
       if params[:pool_id]
-        byebug
         @pool = Pool.find(params[:pool_id])
         UserPref.create(user_id: @user.id, pool_id: params[:pool_id])
       end
@@ -45,21 +44,20 @@ class Api::V1::UsersController < ApplicationController
   def destroy
     if @user
       if params[:bbq_id]
-        @bbq = Bbq.find(params[:bbq_id])
-        UserPref.delete(user_id: @user.id, bbq_id: params[:bbq_id])
+        bbqpref = UserPref.find_by_user_id_and_bbq_id(@user.id, params[:bbq_id])
+        bbqpref.delete
       end
       if params[:zoo_id]
-        @zoo = Zoo.find(params[:zoo_id])
-        UserPref.delete(user_id: @user.id, zoo_id: params[:zoo_id])
+        zoopref = UserPref.find_by_user_id_and_zoo_id(@user.id, params[:zoo_id])
+        zoopref.delete
       end
       if params[:pool_id]
-        byebug
-        @pool = Pool.find(params[:pool_id])
-        UserPref.delete(user_id: @user.id, pool_id: params[:pool_id])
+        poolpref = UserPref.find_by_user_id_and_pool_id(@user.id, params[:pool_id])
+        poolpref.delete
       end
       if params[:tenni_id]
-        @tenni = Tenni.find(params[:tenni_id])
-        UserPref.delete(user_id: @user.id, tenni_id: params[:tenni_id])
+        tennipref = UserPref.find_by_user_id_and_tenni_id(@user.id, params[:tenni_id])
+        tennipref.delete
       end
       render json: @user, status: 200
     end
